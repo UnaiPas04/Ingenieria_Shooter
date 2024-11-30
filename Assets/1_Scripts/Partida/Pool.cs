@@ -17,10 +17,19 @@ public class Pool : IPool
         //armas con mas balas requeriran un pool mas grande
         //cada arma tendra una bala caracteristica
 
-        this.pool = new IPooleableObject[size];
         this.prototipo = prefab.GetComponent<IPooleableObject>();
-        inicializarPool();
-        this._activeObjects = 0;
+
+        if (this.prototipo != null)
+        {
+            this.pool = new IPooleableObject[size];
+            inicializarPool();
+            this._activeObjects = 0;
+        }
+        else
+        {
+            Debug.LogError("El prefab no tiene un componente IPooleableObject");
+            this.pool = null; // Opcional: Indica que no se pudo crear el pool
+        }
     }
     private void inicializarPool()
     {

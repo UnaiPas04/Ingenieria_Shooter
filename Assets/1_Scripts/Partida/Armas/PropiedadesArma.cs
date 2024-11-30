@@ -12,7 +12,14 @@ public class PropiedadesArma : MonoBehaviour
 
     [HideInInspector]public float NumeroBalas;//cuantas balas quedan
 
-    public List<Transform> cannonPosition;
+    public List<Transform> PosicionCannon;
+
+    private int cannonActual=0;
+
+    private void Awake()
+    {
+        Recargar();
+    }
     public void Recargar()
     {
         NumeroBalas = NumeroBalasMax;
@@ -29,5 +36,12 @@ public class PropiedadesArma : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public Transform GetCannonActual()//va alternando entre todos los cañones
+    {
+        cannonActual=(cannonActual+1)%PosicionCannon.Count;
+
+        return PosicionCannon[cannonActual];
     }
 }
