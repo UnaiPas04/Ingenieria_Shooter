@@ -6,7 +6,7 @@ using UnityEngine;
 public class Pool : IPool
 {
     IPooleableObject[] pool;
-
+    
     private IPooleableObject prototipo;
 
     private int _activeObjects;
@@ -42,6 +42,10 @@ public class Pool : IPool
                 return pool[i];
             }
         }
+
+        //si decidimos que pueda crecer:
+        //meteriamos aqui algo para crecer el pool
+        //usar listas en vez de array seria mas eficiente en ese caso
         return null;
     }
 
