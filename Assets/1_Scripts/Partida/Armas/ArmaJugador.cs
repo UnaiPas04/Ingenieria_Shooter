@@ -12,6 +12,10 @@ public class ArmaJugador : MonoBehaviour
 
     PropiedadesArma propiedadesArmaEquipada;
 
+    public bool disparando;
+
+    float ratio = 0;
+    float t=0;
 
     void Start()
     {
@@ -32,11 +36,12 @@ public class ArmaJugador : MonoBehaviour
         }
 
         propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
+        ratio = propiedadesArmaEquipada.RatioBalas;
     }
 
     void GenerarBala()
     {
-        if (propiedadesArmaEquipada.Disparar())
+        if (propiedadesArmaEquipada.Disparar())//si tiene balas en el cargador
         {
             CrearBala(propiedadesArmaEquipada.GetCannonActual());
         }
@@ -53,8 +58,23 @@ public class ArmaJugador : MonoBehaviour
             
             bala.transform.position = t.position;
             bala.transform.eulerAngles = t.eulerAngles;
+            bala.inicializarVelocidad(t.eulerAngles.z);
         }
 
         return bala;
+    }
+
+    private void FixedUpdate()
+    {
+        if (disparando)
+        {
+            t += Time.fixedDeltaTime;
+            if (t > ratio)
+            {
+                t-=ratio;
+
+                GenerarBala();
+            }
+        }
     }
 }

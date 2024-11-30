@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Bala : MonoBehaviour,IPooleableObject
 {
@@ -8,6 +9,7 @@ public class Bala : MonoBehaviour,IPooleableObject
 
     public IPool pool;
 
+    public float velocidad;
     private void Update()
     {
         if (transform.position.y < -8)
@@ -33,7 +35,15 @@ public class Bala : MonoBehaviour,IPooleableObject
         //ponerle valores de fabrica :)
 
         //velocidad
+        
 
+    }
+
+    public void inicializarVelocidad(float angulo)
+    {
+        float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
+        float vy = Mathf.Sin(angulo/180*3.1415f)* velocidad;
+        GetComponent<Rigidbody>().velocity = new Vector3(vx,vy,0);
     }
 
     public IPooleableObject Clone()

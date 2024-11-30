@@ -36,6 +36,7 @@ public class Pool : IPool
         for (int i = 0; i < pool.Length; i++)
         {
             pool[i] = prototipo.Clone();
+            pool[i].setActive(false);
         }
     }
     public IPooleableObject get()
