@@ -7,12 +7,13 @@ public class ArmaJugador : MonoBehaviour
     public GameObject prefab_Bala;
     public List<GameObject> gameObjects_Armas;
 
-    private int armaSeleccionada;
+    private int armaSeleccionada=-1;
     private Pool poolBalas;
 
     PropiedadesArma propiedadesArmaEquipada;
 
     public bool disparando;
+    public bool recargar;
 
     float ratio = 0;
     float t=0;
@@ -50,15 +51,14 @@ public class ArmaJugador : MonoBehaviour
     Bala CrearBala(Transform t)//le pasamos el transform de la punta del arma
     {
         Bala bala = (Bala)poolBalas.get();
-
-
         if (bala)
         {
             bala.pool = poolBalas;
-            
+
             bala.transform.position = t.position;
             bala.transform.eulerAngles = t.eulerAngles;
-            bala.inicializarVelocidad(t.eulerAngles.z);
+            Debug.Log(t.eulerAngles.y);
+            bala.inicializarVelocidad(t.eulerAngles.y);
         }
 
         return bala;
@@ -69,12 +69,20 @@ public class ArmaJugador : MonoBehaviour
         if (disparando)
         {
             t += Time.fixedDeltaTime;
+
             if (t > ratio)
             {
                 t-=ratio;
 
                 GenerarBala();
             }
+            poolBalas.MostrarEstado();
+        }
+        if(recargar)
+        {
+            recargar=false;
+
+            propiedadesArmaEquipada.Recargar();
         }
     }
 }

@@ -24,26 +24,26 @@ public class Bala : MonoBehaviour,IPooleableObject
         active= b;
         gameObject.SetActive(b);
     }
-
     public bool isActive()
     {
         return active;
     }
+
 
     public void reset()
     {
         //ponerle valores de fabrica :)
 
         //velocidad
-        
 
+        GetComponent<TrailRenderer>().Clear();
     }
 
     public void inicializarVelocidad(float angulo)
     {
         float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
-        float vy = Mathf.Sin(angulo/180*3.1415f)* velocidad;
-        GetComponent<Rigidbody>().velocity = new Vector3(vx,vy,0);
+        float vz = -Mathf.Sin(angulo/180*3.1415f)* velocidad;
+        GetComponent<Rigidbody>().velocity = new Vector3(vx,0,vz);
     }
 
     public IPooleableObject Clone()

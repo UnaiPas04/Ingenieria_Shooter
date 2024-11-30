@@ -419,12 +419,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: be45b8e3197eda84f93ae794d803fd82,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: be45b8e3197eda84f93ae794d803fd82,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: be45b8e3197eda84f93ae794d803fd82,
         type: 3}
@@ -483,8 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa554b6019fb65040b20d0fe0fc10208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 0
-  NumeroBalasMax: 0
+  RatioBalas: 0.01
+  NumeroBalasMax: 200
   NumeroBalas: 0
   PosicionCannon:
   - {fileID: 1367976555}
@@ -512,13 +512,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367976554}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.978, z: 0.372}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 1.9310004, z: 0.37200004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1302405846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1827156750
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ Transform:
   m_GameObject: {fileID: 1827156750}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8075067, y: -2.347312, z: -2.863988}
+  m_LocalPosition: {x: 0.34, y: -0.8, z: -0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
