@@ -19,8 +19,8 @@ public class Pool : IPool
 
         this.pool = new IPooleableObject[size];
         this.prototipo = prefab.GetComponent<IPooleableObject>();
-
         inicializarPool();
+        this._activeObjects = 0;
     }
     private void inicializarPool()
     {
@@ -31,25 +31,33 @@ public class Pool : IPool
     }
     public IPooleableObject get()
     {
-        return buscarBalaInactiva();
-    }
-
-    private IPooleableObject buscarBalaInactiva()
-    {
         //devuelve la primera posicion inactiva que encuentra
-        for (int i=0;i<pool.Length;i++)
+        for (int i = 0; i < pool.Length; i++)
         {
-            if ( !pool[i].isActive())
+            if (!pool[i].isActive())
             {
+                pool[i].setActive(true);
+                _activeObjects++;
+
                 return pool[i];
             }
         }
         return null;
-
     }
-    public void release(IPooleableObject obj) 
+
+    public void release(IPooleableObject objeto) 
     {
         //inactiva bala
-        obj.setActive(false);
+        objeto.setActive(false);
+
+        _activeObjects -= 1;
+
+        objeto.reset();
+    }
+
+
+    public void MostrarEstado()
+    {
+        Debug.Log("---ESTADO_POOL--- \n"+_activeObjects+" de "+pool.Length+ "\n-----------------");
     }
 }
