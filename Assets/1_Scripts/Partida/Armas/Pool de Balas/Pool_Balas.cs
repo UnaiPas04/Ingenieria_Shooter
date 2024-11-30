@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Pool_Balas : IPool
+public class Pool : IPool
 {
-    Bala[] poolBalas;
+    IPooleableObject[] pool;
 
-    GameObject prefabBala;
+    private IPooleableObject prototipo;
 
-    public Pool_Balas(int size, GameObject prefabBala)
+    private int _activeObjects;
+
+    public Pool(int size, GameObject prefab)
     {
         //dependiendo del arma que escojas se usara un pool distinto
         //armas con mas balas requeriran un pool mas grande
         //cada arma tendra una bala caracteristica
 
-        this.poolBalas = new Bala[size];
-        this.prefabBala= prefabBala;
+        this.pool = new IPooleableObject[size];
+        this.prototipo = prefab.GetComponent<IPooleableObject>();
+
         inicializarPool();
     }
     private void inicializarPool()
     {
-        for (int i = 0; i < poolBalas.Length; i++)
+        for (int i = 0; i < pool.Length; i++)
         {
-            poolBalas[i] = new Bala(prefabBala);
+            pool[i] = prototipo.Clone();
         }
     }
     public IPooleableObject get()
@@ -30,14 +34,14 @@ public class Pool_Balas : IPool
         return buscarBalaInactiva();
     }
 
-    private Bala buscarBalaInactiva()
+    private IPooleableObject buscarBalaInactiva()
     {
         //devuelve la primera posicion inactiva que encuentra
-        for (int i=0;i<poolBalas.Length;i++)
+        for (int i=0;i<pool.Length;i++)
         {
-            if ( !poolBalas[i].isActive())
+            if ( !pool[i].isActive())
             {
-                return poolBalas[i];
+                return pool[i];
             }
         }
         return null;
@@ -46,6 +50,6 @@ public class Pool_Balas : IPool
     public void release(IPooleableObject obj) 
     {
         //inactiva bala
-
+        obj.setActive(false);
     }
 }

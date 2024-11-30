@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bala : IPooleableObject
+public class Bala : MonoBehaviour,IPooleableObject
 {
     private bool active=false;
 
-    private GameObject objetoBala;
+    public IPool pool;
 
-    public Bala(GameObject prefabBala)
+    private void Update()
     {
-        objetoBala=prefabBala;
+        if (transform.position.y < -8)
+        {
+            pool?.release(this);
+        }
     }
+
+
     public void setActive(bool b)
     {
         active= b;
+        gameObject.SetActive(b);
     }
 
     public bool isActive()
@@ -30,4 +36,10 @@ public class Bala : IPooleableObject
 
     }
 
+    public IPooleableObject Clone()
+    {
+        GameObject copia = Instantiate(gameObject);
+        Bala bala = copia.GetComponent<Bala>();
+        return bala;
+    }
 }

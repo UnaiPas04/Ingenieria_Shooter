@@ -12,4 +12,6 @@ public interface IPooleableObject
     public void reset();
     //al desactivarlo le ponemos valores que se hayan podido cambiar, 
     //para q cuando se invoque este nuevecito
+
+    public IPooleableObject Clone();
 }
