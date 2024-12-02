@@ -14,6 +14,7 @@ public class ArmaJugador : MonoBehaviour
 
     public bool disparando;
     public bool recargar;
+    public int arma=0;
 
     float ratio = 0;
     float t=0;
@@ -84,5 +85,7 @@ public class ArmaJugador : MonoBehaviour
 
             propiedadesArmaEquipada.Recargar();
         }
+        if(arma<3)
+        CambiarArma(arma);
     }
 }
