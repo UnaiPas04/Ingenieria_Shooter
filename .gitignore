@@ -26,3 +26,4 @@ Thumbs.db
 
 # Exclude auto-generated files
 *.unitypackage
+*.vs
