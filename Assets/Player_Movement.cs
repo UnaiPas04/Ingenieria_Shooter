@@ -4,45 +4,65 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
-
-    public CharacterController controller;
     public Transform playerCameraTransform;
+    public Transform capsuleTransform;
 
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
+    [SerializeField] KeyCode runKey = KeyCode.LeftShift;
+
+    [Header("Movement variables")]
     public float defaultSpeed = 12.0f;
     public float jumpSpeed = 5f;
-    public float gravity = 9.8f;
+    public float runningSpeed = 24f;
     public float crouchDistance = 10f;
+    [SerializeField] float airSpeedMultiplier = 0.4f;
+    [SerializeField] float crouchSpeed = 6f;
 
-    private Vector3 v;
-    private float crouchSpeed;
-    private float speed;
+    [Header("Player drag")]
+    public float groundDrag = 6f;
+    public float airDrag = 3f;
+
+    Rigidbody rigidbody;
+
+    Vector3 direction;
+    float speed;
+
+    float playerHeight = 2f;
+    bool isGrounded;
 
     void Start()
     {
-        crouchSpeed = defaultSpeed / 2;
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.freezeRotation = true;
+
         speed = defaultSpeed;
     }
 
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
 
-        v.y -= gravity * Time.deltaTime;
-
-        if(controller.isGrounded)
+        if(isGrounded)
         {
-            v.y = 0f;
+            rigidbody.drag = groundDrag;
+        } else
+        {
+            rigidbody.drag = airDrag;
         }
+
+        direction = transform.right * x + transform.forward * z;
+
         //Jumped
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
-            v.y = jumpSpeed;
+            rigidbody.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
         }
         //Started crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(crouchKey) && isGrounded)
         {
             speed = crouchSpeed;
             Vector3 cameraPosition = playerCameraTransform.localPosition;
@@ -50,15 +70,35 @@ public class Player_Movement : MonoBehaviour
             playerCameraTransform.localPosition = cameraPosition;
         }
         //Stopped crouching
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(crouchKey))
         {
             speed = defaultSpeed;
             Vector3 cameraPosition = playerCameraTransform.localPosition;
             cameraPosition.y = Mathf.Lerp(cameraPosition.y, playerCameraTransform.localPosition.y + crouchDistance, 5.0f * Time.deltaTime);
             playerCameraTransform.localPosition = cameraPosition;
         }
+        //Running
+        if (Input.GetKeyDown(runKey) && isGrounded)
+        {
+            speed = runningSpeed;
+        }
+        //Stopped running
+        if (Input.GetKeyUp(runKey))
+        {
+            speed = defaultSpeed;
+        }
+    }
 
-        controller.Move(move * speed * Time.deltaTime);
-        controller.Move(v * Time.deltaTime);
+    void FixedUpdate()
+    {
+        if (isGrounded)
+        {
+            rigidbody.AddForce(direction.normalized * speed, ForceMode.Acceleration);
+        }
+        else
+        {
+            rigidbody.AddForce(direction.normalized * speed * airSpeedMultiplier, ForceMode.Acceleration);
+        }
+
     }
 }
