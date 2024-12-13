@@ -39,11 +39,11 @@ public class Bala : MonoBehaviour,IPooleableObject
         GetComponent<TrailRenderer>().Clear();
     }
 
-    public void inicializarVelocidad(float angulo)
+    public void inicializarVelocidad()
     {
-        float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
-        float vz = -Mathf.Sin(angulo/180*3.1415f)* velocidad;
-        GetComponent<Rigidbody>().velocity = new Vector3(vx,0,vz);
+       // float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
+        //float vz = -Mathf.Sin(angulo/180*3.1415f)* velocidad;
+        GetComponent<Rigidbody>().velocity = transform.right * velocidad;
     }
 
     public IPooleableObject Clone()

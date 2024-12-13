@@ -26,9 +26,10 @@ public class ArmaJugador : MonoBehaviour
         CambiarArma(0);
     }
 
-    void CambiarArma(int nuevaArma)//se llama con el input del teclado
+    public void CambiarArma(int nuevaArma)//se llama con el input del teclado
     {
         if (armaSeleccionada == nuevaArma) return;
+        if (nuevaArma > 2) nuevaArma = 2;
 
         armaSeleccionada= nuevaArma;
         for (int i=0;i< gameObjects_Armas.Count;i++)
@@ -39,6 +40,20 @@ public class ArmaJugador : MonoBehaviour
 
         propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
         ratio = propiedadesArmaEquipada.RatioBalas;
+    }
+
+    public void RecargarArma() //cuando aprietas tecla de recargar
+    {
+        propiedadesArmaEquipada.Recargar();
+    }
+    public void ApretarGatillo()//cuando aprietas tecla de disparar
+    {
+        disparando = true;
+    }
+
+    public void SoltarGatillo() //cuando sueltas tecla de disparar
+    {
+        disparando = false;
     }
 
     void GenerarBala()
@@ -58,8 +73,7 @@ public class ArmaJugador : MonoBehaviour
 
             bala.transform.position = t.position;
             bala.transform.eulerAngles = t.eulerAngles;
-            Debug.Log(t.eulerAngles.y);
-            bala.inicializarVelocidad(t.eulerAngles.y);
+            bala.inicializarVelocidad();
         }
 
         return bala;
@@ -79,13 +93,5 @@ public class ArmaJugador : MonoBehaviour
             }
             poolBalas.MostrarEstado();
         }
-        if(recargar)
-        {
-            recargar=false;
-
-            propiedadesArmaEquipada.Recargar();
-        }
-        if(arma<3)
-        CambiarArma(arma);
     }
 }
