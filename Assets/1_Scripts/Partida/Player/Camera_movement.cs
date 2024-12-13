@@ -5,12 +5,12 @@ using UnityEngine;
 public class Camera_movement : MonoBehaviour
 {
 
-    public float horizontalSensitivity = 100f;
-    public float verticalSensitivity = 100f;
+    [SerializeField] float horizontalSensitivity = 100f;
+    [SerializeField] float verticalSensitivity = 100f;
 
     public Transform playerBody;
 
-    private float xRotation;
+    float xRotation;
 
     void Start()
     {

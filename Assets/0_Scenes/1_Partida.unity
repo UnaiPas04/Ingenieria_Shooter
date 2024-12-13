@@ -367,10 +367,14 @@ MonoBehaviour:
   playerCameraTransform: {fileID: 2037993488}
   capsuleTransform: {fileID: 1595644548}
   jumpKey: 32
+  crouchKey: 306
+  runKey: 304
   defaultSpeed: 40
-  jumpSpeed: 15
+  jumpSpeed: 10
+  runningSpeed: 24
   crouchDistance: 10
   airSpeedMultiplier: 0.4
+  crouchSpeed: 6
   groundDrag: 4
   airDrag: 2
 --- !u!54 &1055868750
