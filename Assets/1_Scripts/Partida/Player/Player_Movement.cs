@@ -7,9 +7,10 @@ public class Player_Movement : MonoBehaviour
     public Transform playerCameraTransform;
     public Transform capsuleTransform;
 
-    [SerializeField] KeyCode jumpKey = KeyCode.Space;
-    [SerializeField] KeyCode crouchKey = KeyCode.LeftControl;
-    [SerializeField] KeyCode runKey = KeyCode.LeftShift;
+    [Header("Key Binds")]
+    [SerializeField] public KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] public KeyCode crouchKey = KeyCode.LeftControl;
+    [SerializeField] public KeyCode runKey = KeyCode.LeftShift;
 
     [Header("Movement variables")]
     public float defaultSpeed = 12.0f;
@@ -31,6 +32,9 @@ public class Player_Movement : MonoBehaviour
     float playerHeight = 2f;
     bool isGrounded;
 
+    public bool isCrouched;
+    public bool isRunning;
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -41,8 +45,8 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        //float x = Input.GetAxisRaw("Horizontal");
+        //float z = Input.GetAxisRaw("Vertical");
 
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
 
@@ -54,6 +58,7 @@ public class Player_Movement : MonoBehaviour
             rigidbody.drag = airDrag;
         }
 
+        /*
         direction = transform.right * x + transform.forward * z;
 
         //Jumped
@@ -85,6 +90,62 @@ public class Player_Movement : MonoBehaviour
         //Stopped running
         if (Input.GetKeyUp(runKey))
         {
+            speed = defaultSpeed;
+        }
+        */
+    }
+
+    public void Move(float x, float z)
+    {
+        direction = transform.right * x + transform.forward * z;
+    }
+
+    public void Jump()
+    {
+        if(isGrounded) 
+        {
+            rigidbody.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+        }
+    }
+
+    public void StartCrouch()
+    {
+        if (isGrounded && !isCrouched)
+        {
+            isCrouched = true;
+            speed = crouchSpeed;
+            Vector3 cameraPosition = playerCameraTransform.localPosition;
+            cameraPosition.y -= crouchDistance;
+            playerCameraTransform.localPosition = cameraPosition;
+        }
+    }
+
+    public void StopCrouch()
+    {
+        if (isCrouched)
+        {
+            isCrouched = false;
+            speed = defaultSpeed;
+            Vector3 cameraPosition = playerCameraTransform.localPosition;
+            cameraPosition.y += crouchDistance;
+            playerCameraTransform.localPosition = cameraPosition;
+        }
+    }
+
+    public void StartRun()
+    {
+        if(isGrounded && !isRunning)
+        {
+            isRunning = true;
+            speed = runningSpeed;
+        }
+    }
+
+    public void StopRun()
+    {
+        if(isRunning)
+        {
+            isRunning = false;
             speed = defaultSpeed;
         }
     }

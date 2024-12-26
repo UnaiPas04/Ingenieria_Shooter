@@ -28,4 +28,17 @@ public class Camera_movement : MonoBehaviour
 
         playerBody.Rotate(Vector3.up * mouseX);
     }
+
+    public void RotateCamera(float mouseX, float mouseY)
+    {
+        mouseX *= horizontalSensitivity * Time.deltaTime;
+        mouseY *= verticalSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+
 }
