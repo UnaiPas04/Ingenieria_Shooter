@@ -9,11 +9,13 @@ public class FlyWeightEnemy:MonoBehaviour //monoBehaviour para facilitar la inic
 
     public Pool poolBalas;
 
-    public PropiedadesArmas_Genericas propiedadesArmas_Genericas;
+    [HideInInspector] public PropiedadesArmas_Genericas propiedadesArmas_Genericas;
 
     private void Awake()
     {
-        
+        propiedadesArmas_Genericas=GetComponent<PropiedadesArmas_Genericas>();
+
+        poolBalas = new Pool(100, prefab_Bala);
     }
 
 
@@ -28,6 +30,7 @@ public class FlyWeightEnemy:MonoBehaviour //monoBehaviour para facilitar la inic
         Bala bala = (Bala)poolBalas.get();
         if (bala)
         {
+
             bala.damage = propiedadesArmas_Genericas.DanoBala;
             bala.pool = poolBalas;
 

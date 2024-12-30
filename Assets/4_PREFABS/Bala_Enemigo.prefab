@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1157e647a7a23e47b346a63d599f4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 80
+  damage: 0
+  velocidad: 60
 --- !u!96 &8823421169317330045
 TrailRenderer:
   serializedVersion: 3
@@ -200,7 +201,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!33 &328012605372920056
 MeshFilter:
   m_ObjectHideFlags: 0

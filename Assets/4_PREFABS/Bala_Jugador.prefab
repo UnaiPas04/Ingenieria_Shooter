@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1157e647a7a23e47b346a63d599f4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   velocidad: 80
 --- !u!96 &8823421169317330045
 TrailRenderer:
@@ -95,7 +96,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 1
-  m_PreviewTimeScale: 0
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -200,7 +201,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!33 &328012605372920056
 MeshFilter:
   m_ObjectHideFlags: 0

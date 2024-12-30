@@ -12,14 +12,6 @@ public class Bala : MonoBehaviour,IPooleableObject
     public IPool pool;
 
     public float velocidad;
-    private void Update()
-    {
-        if (transform.position.y < -8)
-        {
-            pool?.release(this);
-        }
-    }
-
 
     public void setActive(bool b)
     {
@@ -43,9 +35,9 @@ public class Bala : MonoBehaviour,IPooleableObject
 
     public void inicializarVelocidad()
     {
-       // float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
+        // float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
         //float vz = -Mathf.Sin(angulo/180*3.1415f)* velocidad;
-        GetComponent<Rigidbody>().velocity = transform.right * velocidad;
+        StartCoroutine(EsperarEInicializar());
     }
 
     public IPooleableObject Clone()
@@ -53,5 +45,23 @@ public class Bala : MonoBehaviour,IPooleableObject
         GameObject copia = Instantiate(gameObject);
         Bala bala = copia.GetComponent<Bala>();
         return bala;
+    }
+    IEnumerator EsperarEInicializar()
+    {
+        yield return new WaitForSeconds(0.01f);
+
+        GetComponent<Rigidbody>().velocity = transform.right * velocidad;
+        StartCoroutine(EsperarYDestruir());
+
+    }
+    IEnumerator EsperarYDestruir()
+    {
+        yield return new WaitForSeconds(0.8f);
+        Destruir();
+    }
+
+    public void Destruir()
+    {
+        pool?.release(this);
     }
 }

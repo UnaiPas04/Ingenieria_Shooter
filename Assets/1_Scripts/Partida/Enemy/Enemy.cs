@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
 {
     //VARIABLES INDIVIDUALES DE LOS ENEMIGOS
     public GameObject gameObject_Arma;
-    public PropiedadesArma propiedadesArma;
+    [HideInInspector] public PropiedadesArma propiedadesArma;
 
     private float t = 0;
-    private bool disparando;
+    private bool disparando=true;
 
     //VARIABLES COMUNES A TODOS LOS ENEMIGOS
     public static FlyWeightEnemy _FW_Enemy;
@@ -18,8 +18,14 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         propiedadesArma = gameObject_Arma.GetComponent<PropiedadesArma>();
+
     }
-    
+    private void Start()
+    {
+        _FW_Enemy = Factory_Enemy.GetEnemy();
+
+        RecargarArma();
+    }
 
     public void RecargarArma() //cuando aprietas tecla de recargar
     {
@@ -53,7 +59,7 @@ public class Enemy : MonoBehaviour
 
             if (t > _FW_Enemy.propiedadesArmas_Genericas.RatioBalas)
             {
-                t =0;
+                t = 0;
 
                 GenerarBala();
             }
