@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyWeightEnemy:MonoBehaviour //monoBehaviour para facilitar la inicialización desde el inspector
+public class FlyWeightEnemy: MonoBehaviour //monoBehaviour para facilitar la inicialización desde el inspector
 {
     //VARIABLES COMUNES A TODOS LOS ENEMIGOS
     public GameObject prefab_Bala;
+
+    public Transform posicionJugador;//lo usan para mirar hacia el
 
     public Pool poolBalas;
 
