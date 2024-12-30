@@ -7,6 +7,8 @@ public class Bala : MonoBehaviour,IPooleableObject
 {
     private bool active=false;
 
+    public int damage; //daño de la bala
+
     public IPool pool;
 
     public float velocidad;

@@ -6,18 +6,17 @@ public class ArmaJugador : MonoBehaviour
 {
     public GameObject prefab_Bala;
     public List<GameObject> gameObjects_Armas;
-
-    private int armaSeleccionada=-1;
+    
     private Pool poolBalas;
 
     PropiedadesArma propiedadesArmaEquipada;
-
-    public bool disparando;
-    public bool recargar;
-    public int arma=0;
+    PropiedadesArmas_Genericas propiedadesGenericasArmaEquipada;
 
     float ratio = 0;
     float t=0;
+    private int armaSeleccionada = -1;
+    private bool disparando;
+
 
     void Start()
     {
@@ -39,12 +38,14 @@ public class ArmaJugador : MonoBehaviour
         }
 
         propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
-        ratio = propiedadesArmaEquipada.RatioBalas;
+        propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
+
+        ratio = propiedadesGenericasArmaEquipada.RatioBalas;
     }
 
     public void RecargarArma() //cuando aprietas tecla de recargar
     {
-        propiedadesArmaEquipada.Recargar();
+        propiedadesArmaEquipada.Recargar(propiedadesGenericasArmaEquipada.NumeroBalasMax);
     }
     public void ApretarGatillo()//cuando aprietas tecla de disparar
     {
@@ -60,15 +61,16 @@ public class ArmaJugador : MonoBehaviour
     {
         if (propiedadesArmaEquipada.Disparar())//si tiene balas en el cargador
         {
-            CrearBala(propiedadesArmaEquipada.GetCannonActual());
+            CrearBala(propiedadesArmaEquipada.GetCannonActual(),propiedadesGenericasArmaEquipada.DanoBala);
         }
     }
 
-    Bala CrearBala(Transform t)//le pasamos el transform de la punta del arma
+    Bala CrearBala(Transform t,int dano)//le pasamos el transform de la punta del arma
     {
         Bala bala = (Bala)poolBalas.get();
         if (bala)
         {
+            bala.damage = dano;
             bala.pool = poolBalas;
 
             bala.transform.position = t.position;

@@ -6,23 +6,15 @@ public class PropiedadesArma : MonoBehaviour
 {
     //Se le asigna a los prefabs de arma
 
-    public float RatioBalas;//balas por segundo
-
-    public float NumeroBalasMax;//tamaño cargador
-
     [HideInInspector]public float NumeroBalas;//cuantas balas quedan
 
     public List<Transform> PosicionCannon;
 
     private int cannonActual=0;
 
-    private void Awake()
+    public void Recargar(int n)
     {
-        Recargar();
-    }
-    public void Recargar()
-    {
-        NumeroBalas = NumeroBalasMax;
+        NumeroBalas = n;
     }
 
     public bool Disparar()//gasta una bala, te devuelve si pudo disparar
