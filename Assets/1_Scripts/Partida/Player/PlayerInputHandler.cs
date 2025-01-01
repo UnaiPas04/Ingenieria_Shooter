@@ -8,6 +8,9 @@ public class PlayerInputHandler : MonoBehaviour
     [Header("Movement")]
     public Player_Movement player_Movement;
 
+    [Header("Weapons")]
+    public ArmaJugador armaJugador;
+
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -32,6 +35,25 @@ public class PlayerInputHandler : MonoBehaviour
         {
             ICommand runCommand = new RunCommand(player_Movement);
             runCommand.Execute();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("SWITCHING TO PISTOL");
+            ICommand switchToPistol = new ChangeWeaponCommand(armaJugador, 0);
+            switchToPistol.Execute();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("SWITCHING TO SHOTGUN");
+            ICommand switchToShotgun = new ChangeWeaponCommand(armaJugador, 1);
+            switchToShotgun.Execute();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log("SWITCHING TO AUTOMATIC");
+            ICommand switchToAutomatic = new ChangeWeaponCommand(armaJugador, 2);
+            switchToAutomatic.Execute();
         }
     }
 }

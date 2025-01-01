@@ -3419,6 +3419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_Movement: {fileID: 1055868751}
+  armaJugador: {fileID: 2003892772}
 --- !u!1 &1182741636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 985835360307594325, guid: 340045d22d7489445a83dbaa0c8ca961,
@@ -8561,6 +8562,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2003892770}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2003892772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5752188309194295541, guid: 340045d22d7489445a83dbaa0c8ca961,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003892770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9c690fbf7b6b345b18ff6a6818ee62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2037993485
 GameObject:
   m_ObjectHideFlags: 0
