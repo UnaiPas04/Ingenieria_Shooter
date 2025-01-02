@@ -27,20 +27,29 @@ public class ArmaJugador : MonoBehaviour
 
     public void CambiarArma(int nuevaArma)//se llama con el input del teclado
     {
-        if (armaSeleccionada == nuevaArma) return;
         if (nuevaArma > 2) nuevaArma = 2;
 
-        armaSeleccionada= nuevaArma;
-        for (int i=0;i< gameObjects_Armas.Count;i++)
+        if (armaSeleccionada != nuevaArma)
         {
-            //pone visible el arma seleccionada
-            gameObjects_Armas[i].SetActive(i== nuevaArma);
+            armaSeleccionada = nuevaArma;
+            for (int i = 0; i < gameObjects_Armas.Count; i++)
+            {
+                //pone visible el arma seleccionada
+                gameObjects_Armas[i].SetActive(i == nuevaArma);
+            }
+
+            propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
+            propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
+
+            ratio = propiedadesGenericasArmaEquipada.RatioBalas;
         }
+        else
+        {
+            propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
+            propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
 
-        propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
-        propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
-
-        ratio = propiedadesGenericasArmaEquipada.RatioBalas;
+            ratio = propiedadesGenericasArmaEquipada.RatioBalas;
+        }
     }
 
     public void RecargarArma() //cuando aprietas tecla de recargar
