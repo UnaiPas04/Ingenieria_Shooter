@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2387088341096460473}
   - component: {fileID: 4321955444079754145}
   - component: {fileID: 8266688525402151286}
-  - component: {fileID: 3764487637730043587}
+  - component: {fileID: 4628270670292344855}
   m_Layer: 6
   m_Name: PrefabEnemigo
   m_TagString: Untagged
@@ -63,14 +63,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881f1fd0a8ab8c240b69a04696bef582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 10
+  detectionRadius: 15
   detectionAngle: 45
   exclusionLayer1:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   exclusionLayer2:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!54 &8266688525402151286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -98,8 +98,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &3764487637730043587
-BoxCollider:
+--- !u!136 &4628270670292344855
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -116,9 +116,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2, y: 2.1918, z: 1.21}
-  m_Center: {x: 0, y: 1.1610289, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.64
+  m_Height: 3.6011782
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.8476665, z: 0}
 --- !u!1001 &1490142410614309635
 PrefabInstance:
   m_ObjectHideFlags: 0
