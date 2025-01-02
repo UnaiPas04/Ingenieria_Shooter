@@ -6,7 +6,7 @@ public class ChangeWeaponCommand : ICommand
 {
     private ArmaJugador armaJugador;
     private int index;
-    private float cooldown = 1.5f;
+    private float cooldown = 1.0f;
     private static float lastSwitch;
 
     public ChangeWeaponCommand(ArmaJugador armaJugador, int index)
@@ -17,7 +17,7 @@ public class ChangeWeaponCommand : ICommand
 
     public void Execute()
     {
-        if (Time.time - lastSwitch < cooldown)
+        if (Time.time - lastSwitch > cooldown)
         {
             armaJugador.CambiarArma(index);
             lastSwitch = Time.time;
