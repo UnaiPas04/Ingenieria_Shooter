@@ -7,7 +7,7 @@ public class Bala : MonoBehaviour,IPooleableObject
 {
     private bool active=false;
 
-    public int damage; //daño de la bala
+    public int damage = 10; //daño de la bala
 
     public IPool pool;
 
@@ -63,5 +63,20 @@ public class Bala : MonoBehaviour,IPooleableObject
     public void Destruir()
     {
         pool?.release(this);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
+        }
+
+        pool.release(this);
     }
 }
