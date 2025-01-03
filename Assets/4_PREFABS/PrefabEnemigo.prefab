@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 5973286980968181523}
   - component: {fileID: 2387088341096460473}
   - component: {fileID: 4321955444079754145}
+  - component: {fileID: 3807120317209692992}
   - component: {fileID: 8266688525402151286}
   - component: {fileID: 4628270670292344855}
   - component: {fileID: 1867602985229471829}
   m_Layer: 6
   m_Name: PrefabEnemigo
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,6 +73,18 @@ MonoBehaviour:
   exclusionLayer2:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &3807120317209692992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411197261041559109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc325cf938dad4c4b8439ab2652332e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &8266688525402151286
 Rigidbody:
   m_ObjectHideFlags: 0
