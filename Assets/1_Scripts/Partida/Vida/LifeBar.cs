@@ -18,7 +18,7 @@ public class LifeBar : MonoBehaviour
     }
     private void Update()
     {
-        updateLifeBar();
+        //updateLifeBar();
     }
     public void updateLifeBar() //se llama al recibir daño
     {
@@ -33,5 +33,25 @@ public class LifeBar : MonoBehaviour
 
         //Texto 
         texto.text = lifePoints_obj.GetLifePoints().ToString();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bala")
+        {
+            Bala bala=other.GetComponent<Bala>();
+
+            if (bala!=null)
+            {
+                lifePoints_obj.DecreaseLifePoints(bala.damage);
+                bala.Destruir();
+                updateLifeBar();
+
+            }
+            else
+            {
+                Debug.LogError("Bala sin componente de tipo bala");
+            }
+        }
     }
 }

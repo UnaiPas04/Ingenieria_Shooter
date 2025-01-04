@@ -67,7 +67,7 @@ public class Bala : MonoBehaviour,IPooleableObject
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+      /*  if(collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
@@ -77,6 +77,6 @@ public class Bala : MonoBehaviour,IPooleableObject
             }
         }
 
-        pool.release(this);
+        pool.release(this);*/
     }
 }
