@@ -4649,10 +4649,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1262706633348360830, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: m_BackSortingOrder
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1262706633348360830, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: m_IsCustomRangeActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447309220219991626, guid: e16af2e5822e4804c9974f321bc71255,
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: detectionAngle
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
         type: 3}
@@ -7255,9 +7270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb845fb2718b3149a940bc942a7761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 0.8
-  NumeroBalasMax: 100
-  DanoBala: 10
+  RatioBalas: 0.01
+  NumeroBalasMax: 2
+  DanoBala: 20
 --- !u!1 &564255200
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,7 +7852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb845fb2718b3149a940bc942a7761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 0.2
+  RatioBalas: 0.1
   NumeroBalasMax: 300
   DanoBala: 3
 --- !u!1 &728711639
@@ -10084,6 +10099,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrefabEnemigo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: detectionAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: detectionRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: exclusionLayer1.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321955444079754145, guid: e16af2e5822e4804c9974f321bc71255,
+        type: 3}
+      propertyPath: exclusionLayer2.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 5973286980968181523, guid: e16af2e5822e4804c9974f321bc71255,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10762,7 +10797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb845fb2718b3149a940bc942a7761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 1
+  RatioBalas: 0.6
   NumeroBalasMax: 6
   DanoBala: 30
 --- !u!43 &1209108978
@@ -53902,9 +53937,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb845fb2718b3149a940bc942a7761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 0.5
-  NumeroBalasMax: 10
-  DanoBala: 10
+  RatioBalas: 0.01
+  NumeroBalasMax: 2
+  DanoBala: 20
 --- !u!1 &1798196645
 GameObject:
   m_ObjectHideFlags: 0
