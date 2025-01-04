@@ -16,9 +16,11 @@ public class LifeBar : MonoBehaviour
         lifePoints_obj= GetComponent<LifePoints>();
         updateLifeBar();
     }
-    private void Update()
+    
+    public void updateText(int lifePoints)
     {
-        //updateLifeBar();
+        //Texto 
+        texto.text = lifePoints.ToString();
     }
     public void updateLifeBar() //se llama al recibir daño
     {
@@ -30,10 +32,9 @@ public class LifeBar : MonoBehaviour
         p.x *= -1;
         p.x/=mask_transform.localScale.x;
         content_transform.localPosition = p;
-
-        //Texto 
-        texto.text = lifePoints_obj.GetLifePoints().ToString();
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,15 +44,35 @@ public class LifeBar : MonoBehaviour
 
             if (bala!=null)
             {
-                lifePoints_obj.DecreaseLifePoints(bala.damage);
+                int lifePoints = lifePoints_obj.DecreaseLifePoints(bala.damage);
+                
                 bala.Destruir();
                 updateLifeBar();
+                updateText(lifePoints);
 
+                if (lifePoints == 0)
+                {
+                    Muerte();
+                }
             }
             else
             {
                 Debug.LogError("Bala sin componente de tipo bala");
             }
+        }
+    }
+
+    public void Muerte()
+    {
+        if (this.tag == "Enemy")
+        {
+            //Destruir Enemigo
+            Destroy(this.gameObject);
+            //Indicar que hay 1 menos
+        }
+        else if (this.tag == "Player")
+        {
+            //Mostrar pantalla de derrota
         }
     }
 }

@@ -15,17 +15,11 @@ public class LifePoints : MonoBehaviour
        // victoryManager.OnHealthChange(lifePoints, MaxLifePoints);
     }
 
-    public int GetLifePoints()
-    {
-        return lifePoints;
-    }
-
-    public bool DecreaseLifePoints(int damage)
+    public int DecreaseLifePoints(int damage)
     {
         if (lifePoints > damage)
         {
             lifePoints-=damage;
-            return true;//vivo
         }
         else
         {
@@ -34,8 +28,8 @@ public class LifePoints : MonoBehaviour
             {
                 victoryManager.OnHealthChange(0, MaxLifePoints);
             }*/
-            return false;//muerto
         }
+        return lifePoints;
     }
 
     public bool IsAlive()
