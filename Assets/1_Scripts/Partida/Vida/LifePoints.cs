@@ -5,7 +5,7 @@ using UnityEngine;
 public class LifePoints : MonoBehaviour
 {
     public int MaxLifePoints=100;//inicializas en el inspector a cada enemigo
-    private int lifePoints;
+    public int lifePoints;
 
     private void Awake()
     {
@@ -22,17 +22,22 @@ public class LifePoints : MonoBehaviour
         if (lifePoints > damage)
         {
             lifePoints-=damage;
-            return true;
+            return true;//vivo
         }
         else
         {
             lifePoints = 0;
-            return false;
+            return false;//muerto
         }
     }
 
     public bool IsAlive()
     {
         return lifePoints > 0;
+    }
+
+    public float GetPercent()
+    {
+        return (float)lifePoints / (float)MaxLifePoints;
     }
 }
