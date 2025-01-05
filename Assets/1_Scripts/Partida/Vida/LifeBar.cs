@@ -15,6 +15,7 @@ public class LifeBar : MonoBehaviour
     {
         lifePoints_obj= GetComponent<LifePoints>();
         updateLifeBar();
+        updateText(lifePoints_obj.getLifePoints());
     }
     
     public void updateText(int lifePoints)

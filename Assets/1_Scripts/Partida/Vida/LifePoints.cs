@@ -5,7 +5,7 @@ using UnityEngine;
 public class LifePoints : MonoBehaviour
 {
     public int MaxLifePoints=100;//inicializas en el inspector a cada enemigo
-    public int lifePoints;
+    private int lifePoints;
    // private VictoryManager victoryManager;
 
     private void Awake()
@@ -15,6 +15,10 @@ public class LifePoints : MonoBehaviour
        // victoryManager.OnHealthChange(lifePoints, MaxLifePoints);
     }
 
+    public int getLifePoints()
+    {
+        return lifePoints;
+    }
     public int DecreaseLifePoints(int damage)
     {
         if (lifePoints > damage)
