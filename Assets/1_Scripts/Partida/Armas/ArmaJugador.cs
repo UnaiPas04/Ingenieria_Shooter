@@ -9,8 +9,8 @@ public class ArmaJugador : MonoBehaviour
     
     private Pool poolBalas;
 
-    PropiedadesArma propiedadesArmaEquipada;
-    PropiedadesArmas_Genericas propiedadesGenericasArmaEquipada;
+    public PropiedadesArma propiedadesArmaEquipada;
+    public PropiedadesArmas_Genericas propiedadesGenericasArmaEquipada;
 
     float ratio = 0;
     float t=0;
