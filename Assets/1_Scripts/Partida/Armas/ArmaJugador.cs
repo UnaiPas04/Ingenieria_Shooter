@@ -5,8 +5,9 @@ using UnityEngine;
 public class ArmaJugador : MonoBehaviour
 {
     public GameObject prefab_Bala;
-    public List<GameObject> gameObjects_Armas;
-    
+    public List<GameObject> gameObjects_Armas; // Lista dinámica de armas
+    private List<bool> armasDisponibles; // Estado de disponibilidad de cada arma
+
     private Pool poolBalas;
 
     public PropiedadesArma propiedadesArmaEquipada;
@@ -17,47 +18,56 @@ public class ArmaJugador : MonoBehaviour
     public Vector3 reloadOffset = new Vector3(0, -0.5f, 0);
 
     float ratio = 0;
-    float t=0;
+    float t = 0;
     private int armaSeleccionada = -1;
     private bool disparando;
     private bool reloading;
 
-
     void Start()
     {
-        poolBalas = new Pool(60,prefab_Bala);
+        poolBalas = new Pool(60, prefab_Bala);
 
-        CambiarArma(0);
+        // Desactiva todas las armas al inicio
+        for (int i = 0; i < gameObjects_Armas.Count; i++)
+        {
+            gameObjects_Armas[i].SetActive(false);
+        }
+
+        // Inicializa armas como no disponibles
+        armasDisponibles = new List<bool>();
+        for (int i = 0; i < gameObjects_Armas.Count; i++)
+        {
+            armasDisponibles.Add(false);
+        }
+
+        armaSeleccionada = -1; // Ninguna arma seleccionada
     }
 
-    public void CambiarArma(int nuevaArma)//se llama con el input del teclado
+    public void CambiarArma(int nuevaArma) // Cambia el arma equipada
     {
-        if (nuevaArma > 2) nuevaArma = 2;
-
-        if (armaSeleccionada != nuevaArma)
+        if (nuevaArma >= 0 && nuevaArma < gameObjects_Armas.Count && armasDisponibles[nuevaArma])
         {
-            armaSeleccionada = nuevaArma;
-            for (int i = 0; i < gameObjects_Armas.Count; i++)
+            if (armaSeleccionada != nuevaArma)
             {
-                //pone visible el arma seleccionada
-                gameObjects_Armas[i].SetActive(i == nuevaArma);
+                armaSeleccionada = nuevaArma;
+                for (int i = 0; i < gameObjects_Armas.Count; i++)
+                {
+                    gameObjects_Armas[i]?.SetActive(i == nuevaArma); // Activa solo el arma seleccionada
+                }
+
+                propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
+                propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
+
+                ratio = propiedadesGenericasArmaEquipada.RatioBalas;
             }
-
-            propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
-            propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
-
-            ratio = propiedadesGenericasArmaEquipada.RatioBalas;
         }
         else
         {
-            propiedadesArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArma>();
-            propiedadesGenericasArmaEquipada = gameObjects_Armas[nuevaArma].GetComponent<PropiedadesArmas_Genericas>();
-
-            ratio = propiedadesGenericasArmaEquipada.RatioBalas;
+            Debug.LogWarning($"No puedes cambiar al arma {nuevaArma}, no está disponible.");
         }
     }
 
-    public void RecargarArma() //cuando aprietas tecla de recargar
+    public void RecargarArma() // Recarga el arma actual
     {
         if (!reloading)
         {
@@ -72,7 +82,7 @@ public class ArmaJugador : MonoBehaviour
         Vector3 position = weaponTransform.localPosition;
 
         float time = 0f;
-        while(time < reloadAnimDuration / 2)
+        while (time < reloadAnimDuration / 2)
         {
             weaponTransform.localPosition = Vector3.Lerp(position, position + reloadOffset, time / (reloadAnimDuration / 2));
             time += Time.deltaTime;
@@ -82,7 +92,7 @@ public class ArmaJugador : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         time = 0f;
-        while(time < reloadAnimDuration / 2)
+        while (time < reloadAnimDuration / 2)
         {
             weaponTransform.localPosition = Vector3.Lerp(position + reloadOffset, position, time / (reloadAnimDuration / 2));
             time += Time.deltaTime;
@@ -96,25 +106,25 @@ public class ArmaJugador : MonoBehaviour
         reloading = false;
     }
 
-    public void ApretarGatillo()//cuando aprietas tecla de disparar
+    public void ApretarGatillo() // Cuando se aprieta el botón de disparar
     {
         disparando = true;
     }
 
-    public void SoltarGatillo() //cuando sueltas tecla de disparar
+    public void SoltarGatillo() // Cuando se suelta el botón de disparar
     {
         disparando = false;
     }
 
     void GenerarBala()
     {
-        if (propiedadesArmaEquipada.Disparar())//si tiene balas en el cargador
+        if (propiedadesArmaEquipada.Disparar()) // Si tiene balas en el cargador
         {
-            CrearBala(propiedadesArmaEquipada.GetCannonActual(),propiedadesGenericasArmaEquipada.DanoBala);
+            CrearBala(propiedadesArmaEquipada.GetCannonActual(), propiedadesGenericasArmaEquipada.DanoBala);
         }
     }
 
-    Bala CrearBala(Transform t,int dano)//le pasamos el transform de la punta del arma
+    Bala CrearBala(Transform t, int dano) // Crea una bala
     {
         Bala bala = (Bala)poolBalas.get();
         if (bala)
@@ -138,7 +148,7 @@ public class ArmaJugador : MonoBehaviour
 
             if (t > ratio)
             {
-                t-=ratio;
+                t -= ratio;
 
                 GenerarBala();
             }
@@ -147,4 +157,24 @@ public class ArmaJugador : MonoBehaviour
     }
 
     public bool isReloading() { return reloading; }
+
+    // NUEVO: Método para recoger armas
+    public void RecogerArma(int armaIndex)
+    {
+        if (armaIndex >= 0 && armaIndex < gameObjects_Armas.Count && !armasDisponibles[armaIndex])
+        {
+            // Activa el arma recogida
+            armasDisponibles[armaIndex] = true;
+            gameObjects_Armas[armaIndex].SetActive(true);
+
+            // Cambia automáticamente al arma recogida
+            CambiarArma(armaIndex);
+
+            Debug.Log($"Arma con índice {armaIndex} recogida y activada.");
+        }
+        else
+        {
+            Debug.LogWarning($"El índice {armaIndex} ya está disponible o no es válido.");
+        }
+    }
 }
