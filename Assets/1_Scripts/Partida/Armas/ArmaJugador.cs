@@ -12,10 +12,15 @@ public class ArmaJugador : MonoBehaviour
     public PropiedadesArma propiedadesArmaEquipada;
     public PropiedadesArmas_Genericas propiedadesGenericasArmaEquipada;
 
+    public Transform weaponTransform;
+    public float reloadAnimDuration = 1.5f;
+    public Vector3 reloadOffset = new Vector3(0, -0.5f, 0);
+
     float ratio = 0;
     float t=0;
     private int armaSeleccionada = -1;
     private bool disparando;
+    private bool reloading;
 
 
     void Start()
@@ -54,8 +59,43 @@ public class ArmaJugador : MonoBehaviour
 
     public void RecargarArma() //cuando aprietas tecla de recargar
     {
-        propiedadesArmaEquipada.Recargar(propiedadesGenericasArmaEquipada.NumeroBalasMax);
+        if (!reloading)
+        {
+            StartCoroutine(ReloadAnimation());
+        }
     }
+
+    IEnumerator ReloadAnimation()
+    {
+        reloading = true;
+
+        Vector3 position = weaponTransform.localPosition;
+
+        float time = 0f;
+        while(time < reloadAnimDuration / 2)
+        {
+            weaponTransform.localPosition = Vector3.Lerp(position, position + reloadOffset, time / (reloadAnimDuration / 2));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        time = 0f;
+        while(time < reloadAnimDuration / 2)
+        {
+            weaponTransform.localPosition = Vector3.Lerp(position + reloadOffset, position, time / (reloadAnimDuration / 2));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        weaponTransform.localPosition = position;
+
+        propiedadesArmaEquipada.Recargar(propiedadesGenericasArmaEquipada.NumeroBalasMax);
+
+        reloading = false;
+    }
+
     public void ApretarGatillo()//cuando aprietas tecla de disparar
     {
         disparando = true;
@@ -105,4 +145,6 @@ public class ArmaJugador : MonoBehaviour
             poolBalas.MostrarEstado();
         }
     }
+
+    public bool isReloading() { return reloading; }
 }

@@ -15783,7 +15783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc325cf938dad4c4b8439ab2652332e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxLifePoints: 500
+  maxLifePoints: 100
 --- !u!114 &1055868756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63358,6 +63358,21 @@ PrefabInstance:
         type: 3}
       propertyPath: disparando
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752188309194295541, guid: 340045d22d7489445a83dbaa0c8ca961,
+        type: 3}
+      propertyPath: reloadOffset.y
+      value: -0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752188309194295541, guid: 340045d22d7489445a83dbaa0c8ca961,
+        type: 3}
+      propertyPath: weaponTransform
+      value: 
+      objectReference: {fileID: 2003892771}
+    - target: {fileID: 5752188309194295541, guid: 340045d22d7489445a83dbaa0c8ca961,
+        type: 3}
+      propertyPath: reloadAnimDuration
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6148393732463104792, guid: 340045d22d7489445a83dbaa0c8ca961,
         type: 3}

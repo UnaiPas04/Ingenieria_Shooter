@@ -55,14 +55,20 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ICommand reloadWeaponCommand = new ReloadCommand(armaJugador);
-            reloadWeaponCommand.Execute();
+            if (!armaJugador.isReloading())
+            {
+                ICommand reloadWeaponCommand = new ReloadCommand(armaJugador);
+                reloadWeaponCommand.Execute();
+            }
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            ICommand startShootingCommand = new StartShootingCommand(armaJugador);
-            startShootingCommand.Execute();
+            if (!armaJugador.isReloading())
+            {
+                ICommand startShootingCommand = new StartShootingCommand(armaJugador);
+                startShootingCommand.Execute();
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {
