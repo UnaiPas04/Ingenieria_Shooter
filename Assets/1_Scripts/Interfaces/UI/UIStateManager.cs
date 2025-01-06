@@ -32,10 +32,13 @@ public class UIStateManager : MonoBehaviour
     {
         SceneManager.LoadScene("1_Partida"); 
     }
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("0_MenuInicial");
+    }
 
     // Métodos para manejar transiciones específicas
     public void GoToMainMenu() => SetState(new MainMenuState());
-    public void GoToPauseMenu() => SetState(new PauseMenuState());
     public void GoToCredits() => SetState(new CreditsState());
     public void GoToExit() => SetState(new ExitsState());
 }
