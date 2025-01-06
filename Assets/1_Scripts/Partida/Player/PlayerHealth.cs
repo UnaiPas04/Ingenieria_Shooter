@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
     {
         foreach (var observer in observers)
         {
-            observer.OnPlayerDeath();
+            observer.OnDeath();
         }
     }
 

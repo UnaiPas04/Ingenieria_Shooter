@@ -6,5 +6,5 @@ public interface IHealthObserver
 {
     void OnHealthChange(int currentHealth, int maxHealth);
 
-    void OnPlayerDeath();
+    void OnDeath();
 }

@@ -13,7 +13,7 @@ public class Healthbar : MonoBehaviour, IHealthObserver
         healthBar.value = (float)currentHealth / maxHealth;
     }
 
-    public void OnPlayerDeath()
+    public void OnDeath()
     {
         Debug.Log("GAME OVER");
     }

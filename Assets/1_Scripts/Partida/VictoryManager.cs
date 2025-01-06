@@ -24,7 +24,7 @@ public class VictoryManager : MonoBehaviour, IHealthObserver
         }
     }
 
-    public void OnPlayerDeath() { }
+    public void OnDeath() { }
 
     public void CheckVictory()
     {

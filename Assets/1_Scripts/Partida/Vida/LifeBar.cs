@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class LifeBar : MonoBehaviour
+public class LifeBar : MonoBehaviour, IHealthObserver
 {
     public float MaskDistanceMask;//cuanto hay que mover la mascara para q quede la barra ocluida totalmente
     private LifePoints lifePoints_obj;
@@ -14,8 +14,17 @@ public class LifeBar : MonoBehaviour
     void Start()
     {
         lifePoints_obj= GetComponent<LifePoints>();
+
+        if(lifePoints_obj != null )
+        {
+            lifePoints_obj.AddObserver(this);
+            OnHealthChange(lifePoints_obj.getLifePoints(), lifePoints_obj.maxLifePoints);
+        }
+
+        /*
         updateLifeBar();
         updateText(lifePoints_obj.getLifePoints());
+        */
     }
     
     public void updateText(int lifePoints)
@@ -23,19 +32,24 @@ public class LifeBar : MonoBehaviour
         //Texto 
         texto.text = lifePoints.ToString();
     }
-    public void updateLifeBar() //se llama al recibir daño
+    public void OnHealthChange(int currentHealth, int maxHealth) //se llama al recibir daño
     {
         //Barra de vida
         Vector3 p = mask_transform.localPosition;
-        float d = - MaskDistanceMask + MaskDistanceMask * lifePoints_obj.GetPercent();
+        float d = -MaskDistanceMask + MaskDistanceMask * ((float)currentHealth / maxHealth);
         p.x = d;
         mask_transform.localPosition = p;
         p.x *= -1;
         p.x/=mask_transform.localScale.x;
         content_transform.localPosition = p;
+
+        texto.text = currentHealth.ToString();
     }
 
-    
+    public void OnDeath()
+    {
+        Muerte();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,6 +59,7 @@ public class LifeBar : MonoBehaviour
 
             if (bala!=null)
             {
+                /*
                 int lifePoints = lifePoints_obj.DecreaseLifePoints(bala.damage);
                 
                 bala.Destruir();
@@ -55,6 +70,11 @@ public class LifeBar : MonoBehaviour
                 {
                     Muerte();
                 }
+                */
+                Debug.Log("Daño de la bala: " + bala.damage);
+                lifePoints_obj.DecreaseLifePoints(bala.damage);
+                bala.Destruir();
+
             }
             else
             {
@@ -67,6 +87,7 @@ public class LifeBar : MonoBehaviour
     {
         if (this.tag == "Enemy")
         {
+            Debug.Log("Enemy death.");
             //Destruir Enemigo
             Destroy(this.gameObject);
             //Indicar que hay 1 menos

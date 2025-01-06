@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class LifePoints : MonoBehaviour
 {
-    public int MaxLifePoints=100;//inicializas en el inspector a cada enemigo
+    public int maxLifePoints = 100;//inicializas en el inspector a cada enemigo
     private int lifePoints;
+    private List<IHealthObserver> observers = new List<IHealthObserver>();
    // private VictoryManager victoryManager;
 
     private void Awake()
     {
-        lifePoints = MaxLifePoints;
+        lifePoints = maxLifePoints;
       //  victoryManager = FindFirstObjectByType<VictoryManager>();
        // victoryManager.OnHealthChange(lifePoints, MaxLifePoints);
     }
@@ -28,11 +29,13 @@ public class LifePoints : MonoBehaviour
         else
         {
             lifePoints = 0;
+            NotifyDeath();
          /*   if (victoryManager != null)
             {
                 victoryManager.OnHealthChange(0, MaxLifePoints);
             }*/
         }
+        NotifyHealthChange();
         return lifePoints;
     }
 
@@ -43,6 +46,35 @@ public class LifePoints : MonoBehaviour
 
     public float GetPercent()
     {
-        return (float)lifePoints / (float)MaxLifePoints;
+        return (float)lifePoints / (float)maxLifePoints;
+    }
+
+    public void AddObserver(IHealthObserver observer)
+    {
+        if (!observers.Contains(observer))
+        {
+            observers.Add(observer);
+        }
+    }
+
+    public void RemoveObserver(IHealthObserver observer)
+    {
+        observers.Remove(observer);
+    }
+
+    public void NotifyHealthChange()
+    {
+        foreach (IHealthObserver observer in observers)
+        {
+            observer.OnHealthChange(lifePoints, maxLifePoints);
+        }
+    }
+
+    public void NotifyDeath()
+    {
+        foreach (IHealthObserver observer in observers)
+        {
+            observer.OnDeath();
+        }
     }
 }

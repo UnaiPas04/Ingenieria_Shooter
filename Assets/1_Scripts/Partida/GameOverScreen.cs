@@ -13,7 +13,7 @@ public class GameOverScreen : MonoBehaviour, IHealthObserver
         return;
     }
 
-    public void OnPlayerDeath()
+    public void OnDeath()
     {
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
