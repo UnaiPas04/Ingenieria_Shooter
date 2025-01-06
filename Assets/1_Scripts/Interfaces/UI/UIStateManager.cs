@@ -16,6 +16,10 @@ public class UIStateManager : MonoBehaviour
         currentState = newState;
         currentState.EnterState(this);
     }
+    private void Start()
+    {
+        SetState(new MainMenuState()); // Estado inicial
+    }
 
     private void Update()
     {
@@ -33,4 +37,5 @@ public class UIStateManager : MonoBehaviour
     public void GoToMainMenu() => SetState(new MainMenuState());
     public void GoToPauseMenu() => SetState(new PauseMenuState());
     public void GoToCredits() => SetState(new CreditsState());
+    public void GoToExit() => SetState(new ExitsState());
 }
