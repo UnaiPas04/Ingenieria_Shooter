@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
-    public Healthbar healthbar;
+
+    public GameObject introScreen;
 
     void Start()
     {
-        playerHealth.AddObserver(healthbar);
+        introScreen.SetActive(true);
+        GameStateManager.Instance.PauseGame();
+    }
+
+    public void Continuar()
+    {
+        introScreen.SetActive(false);
+        GameStateManager.Instance.StartGame();
     }
 }

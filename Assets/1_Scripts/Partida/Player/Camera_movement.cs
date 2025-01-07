@@ -14,11 +14,12 @@ public class Camera_movement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         xRotation = 0f;
     }
     void Update()
     {
+        if (!GameStateManager.Instance.GameStarted) return;
+
         float mouseX = Input.GetAxisRaw("Mouse X") * horizontalSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * verticalSensitivity * Time.deltaTime;
 

@@ -25,7 +25,6 @@ public class GameOverManager: MonoBehaviour
     {
         if (gameOverScreen != null)
         {
-            Debug.Log("We have a gameOverScreen");
             gameOverScreen.SetActive(true);
             postProcessingVolume.SetActive(true);
             Time.timeScale = 0f;

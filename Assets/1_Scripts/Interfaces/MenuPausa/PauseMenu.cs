@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        if (!GameStateManager.Instance.GameStarted && !isPaused) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -34,11 +36,8 @@ public class PauseMenu : MonoBehaviour
             Debug.LogWarning("pauseMenuPanel no está asignado.");
         }
 
-        Time.timeScale = 0f; // Congela el juego
+        GameStateManager.Instance.PauseGame();
         isPaused = true;
-
-        Cursor.lockState = CursorLockMode.None; // Libera el cursor
-        Cursor.visible = true; // Hace visible el cursor
     }
 
     public void ResumeGame()
@@ -49,11 +48,8 @@ public class PauseMenu : MonoBehaviour
             pauseMenuPanel.SetActive(false); // Desactiva el panel
         }
 
-        Time.timeScale = 1f; // Reanuda el juego
+        GameStateManager.Instance.StartGame();
         isPaused = false;
-
-        Cursor.lockState = CursorLockMode.Locked; // Bloquea el cursor
-        Cursor.visible = false; // Oculta el cursor
     }
 
     public void GoToMainMenu()
