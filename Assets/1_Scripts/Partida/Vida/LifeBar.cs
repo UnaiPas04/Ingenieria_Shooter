@@ -20,11 +20,6 @@ public class LifeBar : MonoBehaviour, IHealthObserver
             lifePoints_obj.AddObserver(this);
             OnHealthChange(lifePoints_obj.getLifePoints(), lifePoints_obj.maxLifePoints);
         }
-
-        /*
-        updateLifeBar();
-        updateText(lifePoints_obj.getLifePoints());
-        */
     }
     
     public void updateText(int lifePoints)
@@ -48,7 +43,23 @@ public class LifeBar : MonoBehaviour, IHealthObserver
 
     public void OnDeath()
     {
-        Muerte();
+        if (this.tag == "Enemy")
+        {
+            Debug.Log("Enemy death.");
+            //Destruir Enemigo
+            Destroy(this.gameObject);
+            //Indicar que hay 1 menos
+        }
+        else if (this.tag == "Player")
+        {
+            //Mostrar pantalla de derrota
+            Debug.Log("Player death.");
+
+            if (GameOverManager.Instance != null)
+            {
+                GameOverManager.Instance.TriggerGameOver();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -79,27 +90,6 @@ public class LifeBar : MonoBehaviour, IHealthObserver
             else
             {
                 Debug.LogError("Bala sin componente de tipo bala");
-            }
-        }
-    }
-
-    public void Muerte()
-    {
-        if (this.tag == "Enemy")
-        {
-            Debug.Log("Enemy death.");
-            //Destruir Enemigo
-            Destroy(this.gameObject);
-            //Indicar que hay 1 menos
-        }
-        else if (this.tag == "Player")
-        {
-            //Mostrar pantalla de derrota
-            Debug.Log("Player death.");
-
-            if(GameOverManager.Instance != null)
-            {
-                GameOverManager.Instance.TriggerGameOver();
             }
         }
     }

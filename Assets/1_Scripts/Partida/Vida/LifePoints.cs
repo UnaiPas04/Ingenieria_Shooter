@@ -7,13 +7,10 @@ public class LifePoints : MonoBehaviour
     public int maxLifePoints = 100;//inicializas en el inspector a cada enemigo
     private int lifePoints;
     private List<IHealthObserver> observers = new List<IHealthObserver>();
-   // private VictoryManager victoryManager;
 
     private void Awake()
     {
         lifePoints = maxLifePoints;
-      //  victoryManager = FindFirstObjectByType<VictoryManager>();
-       // victoryManager.OnHealthChange(lifePoints, MaxLifePoints);
     }
 
     public int getLifePoints()
@@ -30,10 +27,6 @@ public class LifePoints : MonoBehaviour
         {
             lifePoints = 0;
             NotifyDeath();
-         /*   if (victoryManager != null)
-            {
-                victoryManager.OnHealthChange(0, MaxLifePoints);
-            }*/
         }
         NotifyHealthChange();
         return lifePoints;
