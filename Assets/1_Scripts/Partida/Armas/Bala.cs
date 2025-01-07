@@ -35,8 +35,6 @@ public class Bala : MonoBehaviour,IPooleableObject
 
     public void inicializarVelocidad()
     {
-        // float vx =Mathf.Cos(angulo/180*3.1415f)* velocidad;
-        //float vz = -Mathf.Sin(angulo/180*3.1415f)* velocidad;
         StartCoroutine(EsperarEInicializar());
     }
 
@@ -65,18 +63,4 @@ public class Bala : MonoBehaviour,IPooleableObject
         pool?.release(this);
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-      /*  if(collision.gameObject.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage);
-            }
-        }
-
-        pool.release(this);*/
-    }
 }

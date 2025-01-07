@@ -118,6 +118,8 @@ public class ArmaJugador : MonoBehaviour
 
     void GenerarBala()
     {
+        if (propiedadesArmaEquipada == null) return;
+
         if (propiedadesArmaEquipada.Disparar()) // Si tiene balas en el cargador
         {
             CrearBala(propiedadesArmaEquipada.GetCannonActual(), propiedadesGenericasArmaEquipada.DanoBala);

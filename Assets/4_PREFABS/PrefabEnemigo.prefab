@@ -58,7 +58,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObject_Arma: {fileID: 8584189007722758695}
   propiedadesArma: {fileID: 0}
-  shotDelay: 2
+  minReloadTime: 3
+  maxReloadTime: 6
 --- !u!114 &4321955444079754145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +179,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.4417238, y: 0.2467699, z: 0.34355128}
-  m_Center: {x: 0.91, y: 2.3, z: -0.36}
+  m_Center: {x: 1.13, y: 2.52, z: -0.46}
 --- !u!136 &6234986513236960131
 CapsuleCollider:
   m_ObjectHideFlags: 0
