@@ -48,7 +48,6 @@ public class LifeBar : MonoBehaviour, IHealthObserver
             Debug.Log("Enemy death.");
             //Destruir Enemigo
             Destroy(this.gameObject);
-            //Indicar que hay 1 menos
         }
         else if (this.tag == "Player")
         {

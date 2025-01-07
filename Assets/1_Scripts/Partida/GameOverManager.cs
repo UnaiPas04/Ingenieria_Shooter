@@ -7,6 +7,7 @@ public class GameOverManager: MonoBehaviour
 {
     public static GameOverManager Instance;
     public GameObject gameOverScreen;
+    public GameObject postProcessingVolume;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class GameOverManager: MonoBehaviour
         {
             Debug.Log("We have a gameOverScreen");
             gameOverScreen.SetActive(true);
+            postProcessingVolume.SetActive(true);
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -39,6 +41,7 @@ public class GameOverManager: MonoBehaviour
     public void Respawn()
     {
         Time.timeScale = 1f;
+        postProcessingVolume.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
