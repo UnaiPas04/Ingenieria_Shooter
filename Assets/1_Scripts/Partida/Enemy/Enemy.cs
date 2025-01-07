@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour, IHealthObserver
 
             // Activar animación de correr
             animator.SetBool("IsRunning", true);
-            Debug.Log($"IsRunning: {animator.GetBool("IsRunning")}");
+            //Debug.Log($"IsRunning: {animator.GetBool("IsRunning")}");
         }
         else
         {

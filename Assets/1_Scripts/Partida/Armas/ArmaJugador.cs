@@ -69,6 +69,8 @@ public class ArmaJugador : MonoBehaviour
 
     public void RecargarArma() // Recarga el arma actual
     {
+        if (propiedadesArmaEquipada == null) return;
+
         if (!reloading)
         {
             StartCoroutine(ReloadAnimation());

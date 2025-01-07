@@ -10872,7 +10872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RatioBalas: 0.01
   NumeroBalasMax: 4
-  DanoBala: 10
+  DanoBala: 25
 --- !u!1 &550265623
 GameObject:
   m_ObjectHideFlags: 0
@@ -16497,9 +16497,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.23
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!114 &1055868755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16575,7 +16575,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 1055868753}
   healthbar: {fileID: 1128500226}
-  gameOverScreen: {fileID: 1878172155}
 --- !u!43 &1082516129
 Mesh:
   m_ObjectHideFlags: 0
@@ -17051,9 +17050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb845fb2718b3149a940bc942a7761d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RatioBalas: 0.6
+  RatioBalas: 0.4
   NumeroBalasMax: 6
-  DanoBala: 30
+  DanoBala: 35
 --- !u!43 &1209108978
 Mesh:
   m_ObjectHideFlags: 0
@@ -62876,8 +62875,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RatioBalas: 0.01
-  NumeroBalasMax: 2
-  DanoBala: 20
+  NumeroBalasMax: 4
+  DanoBala: 5
 --- !u!1 &1798196645
 GameObject:
   m_ObjectHideFlags: 0
@@ -63603,7 +63602,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1878172153}
-  playerHealth: {fileID: 1055868753}
 --- !u!1001 &1880325806
 PrefabInstance:
   m_ObjectHideFlags: 0
