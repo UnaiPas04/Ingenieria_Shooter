@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour, IHealthObserver
     private bool recargando = false;
     private bool persiguiendo = false;
 
+    [Header("Reload Time")]
+    [SerializeField] private float minReloadTime = 3f;
+    [SerializeField] private float maxReloadTime = 6f;
+
+
     // VARIABLES COMUNES A TODOS LOS ENEMIGOS
     public static FlyWeightEnemy _FW_Enemy;
 
@@ -102,7 +107,8 @@ public class Enemy : MonoBehaviour, IHealthObserver
     IEnumerator EsperarYRecargar()
     {
         recargando = true;
-        yield return new WaitForSeconds(0.8f);
+        float waitTime = Random.Range(minReloadTime, maxReloadTime);
+        yield return new WaitForSeconds(waitTime);
         propiedadesArma.Recargar(_FW_Enemy.propiedadesArmas_Genericas.NumeroBalasMax);
         recargando = false;
     }

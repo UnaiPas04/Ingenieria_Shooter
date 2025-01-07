@@ -95,6 +95,12 @@ public class LifeBar : MonoBehaviour, IHealthObserver
         else if (this.tag == "Player")
         {
             //Mostrar pantalla de derrota
+            Debug.Log("Player death.");
+
+            if(GameOverManager.Instance != null)
+            {
+                GameOverManager.Instance.TriggerGameOver();
+            }
         }
     }
 }

@@ -58,6 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObject_Arma: {fileID: 8584189007722758695}
   propiedadesArma: {fileID: 0}
+  shotDelay: 2
 --- !u!114 &4321955444079754145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411197261041559109}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 200
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
