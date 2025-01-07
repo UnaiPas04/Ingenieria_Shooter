@@ -111,6 +111,7 @@ public class ArmaJugador : MonoBehaviour
     public void ApretarGatillo() // Cuando se aprieta el botón de disparar
     {
         disparando = true;
+        t = ratio;
     }
 
     public void SoltarGatillo() // Cuando se suelta el botón de disparar
