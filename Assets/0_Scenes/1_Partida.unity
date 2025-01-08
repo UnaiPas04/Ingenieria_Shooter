@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 14999761}
   - component: {fileID: 14999760}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasGameOverIntro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,6 +334,7 @@ Transform:
   - {fileID: 927348290}
   - {fileID: 2077685698}
   - {fileID: 582739024}
+  - {fileID: 1296931462}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &67590903 stripped
@@ -15007,12 +15008,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296931457}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.010765, y: 43.66638, z: 127.73594}
-  m_LocalScale: {x: 6.42, y: 10.71, z: 5.87}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -3.8932164, y: 12.443967, z: -83.98206}
+  m_LocalScale: {x: 10.699997, y: 17.849998, z: 9.78333}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 62231385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1296931463
 MonoBehaviour:
@@ -16885,7 +16886,7 @@ GameObject:
   - component: {fileID: 1603644802}
   - component: {fileID: 1603644801}
   m_Layer: 5
-  m_Name: PauseMenuCanvas
+  m_Name: CanvasPausa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73500,14 +73501,13 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1080095934}
   - {fileID: 1798196647}
+  - {fileID: 62231385}
   - {fileID: 1055868748}
   - {fileID: 2050211660}
-  - {fileID: 1080095934}
   - {fileID: 14999763}
-  - {fileID: 941549328}
-  - {fileID: 62231385}
   - {fileID: 1381592683}
-  - {fileID: 1296931462}
   - {fileID: 1603644805}
+  - {fileID: 941549328}
   - {fileID: 1507402593}
