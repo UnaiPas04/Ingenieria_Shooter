@@ -45,8 +45,6 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        //float x = Input.GetAxisRaw("Horizontal");
-        //float z = Input.GetAxisRaw("Vertical");
 
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
 
@@ -57,42 +55,6 @@ public class Player_Movement : MonoBehaviour
         {
             rigidbody.drag = airDrag;
         }
-
-        /*
-        direction = transform.right * x + transform.forward * z;
-
-        //Jumped
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
-        {
-            rigidbody.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-        }
-        //Started crouching
-        if (Input.GetKeyDown(crouchKey) && isGrounded)
-        {
-            speed = crouchSpeed;
-            Vector3 cameraPosition = playerCameraTransform.localPosition;
-            cameraPosition.y = Mathf.Lerp(cameraPosition.y, playerCameraTransform.localPosition.y - crouchDistance, 5.0f * Time.deltaTime);
-            playerCameraTransform.localPosition = cameraPosition;
-        }
-        //Stopped crouching
-        if (Input.GetKeyUp(crouchKey))
-        {
-            speed = defaultSpeed;
-            Vector3 cameraPosition = playerCameraTransform.localPosition;
-            cameraPosition.y = Mathf.Lerp(cameraPosition.y, playerCameraTransform.localPosition.y + crouchDistance, 5.0f * Time.deltaTime);
-            playerCameraTransform.localPosition = cameraPosition;
-        }
-        //Running
-        if (Input.GetKeyDown(runKey) && isGrounded)
-        {
-            speed = runningSpeed;
-        }
-        //Stopped running
-        if (Input.GetKeyUp(runKey))
-        {
-            speed = defaultSpeed;
-        }
-        */
     }
 
     public void Move(float x, float z)

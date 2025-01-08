@@ -10,7 +10,8 @@ public class LifeBar : MonoBehaviour, IHealthObserver
     public Transform mask_transform;
     public Transform content_transform;
     public TextMeshProUGUI texto;
-
+    public AudioSource muerte;
+    bool dying = false;
     void Start()
     {
         lifePoints_obj= GetComponent<LifePoints>();
@@ -45,9 +46,14 @@ public class LifeBar : MonoBehaviour, IHealthObserver
     {
         if (this.tag == "Enemy")
         {
-            Debug.Log("Enemy death.");
-            //Destruir Enemigo
-            Destroy(this.gameObject);
+            if (!dying)
+            {
+                muerte.Play();
+                dying = true;
+                Debug.Log("Enemy death.");
+                //Destruir Enemigo
+                Destroy(this.gameObject, muerte.clip.length);
+            }
         }
         else if (this.tag == "Player")
         {

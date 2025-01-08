@@ -13,6 +13,8 @@ public class Bala : MonoBehaviour,IPooleableObject
 
     public float velocidad;
 
+    public AudioSource disparo;
+
     public void setActive(bool b)
     {
         active= b;
@@ -46,6 +48,8 @@ public class Bala : MonoBehaviour,IPooleableObject
     }
     IEnumerator EsperarEInicializar()
     {
+        disparo.Play();
+
         yield return new WaitForSeconds(0.01f);
 
         GetComponent<Rigidbody>().velocity = transform.right * velocidad;

@@ -11,6 +11,8 @@ public class PlayerInputHandler : MonoBehaviour
     [Header("Weapons")]
     public ArmaJugador armaJugador;
 
+    public AudioSource recargarAudio;
+
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -57,6 +59,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if (!armaJugador.isReloading())
             {
+                recargarAudio.Play();
                 ICommand reloadWeaponCommand = new ReloadCommand(armaJugador);
                 reloadWeaponCommand.Execute();
             }
