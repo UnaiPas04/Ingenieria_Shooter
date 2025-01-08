@@ -9,14 +9,15 @@ public class DetectPlayer : MonoBehaviour
 
     Enemy enemy;
     public float detectionRadius = 10f;  // Radio de la esfera para detectar objetos cercanos
-    public float detectionAngle = 45f;   // Ángulo de visión (45 grados)
     private int p = 50; //probaabilidad de que compruebe la colision (eficiencia)
     public LayerMask exclusionLayer1; 
     public LayerMask exclusionLayer2;
 
-    private void Awake()
+    Transform posJ;
+    private void Start()
     {
         enemy= GetComponent<Enemy>();
+        posJ = Factory_Enemy.GetEnemy().posicionJugador;
     }
     void Update()
     {
@@ -32,38 +33,42 @@ public class DetectPlayer : MonoBehaviour
     void CheckClosestObjectInFront()
     {
         LayerMask mask = ~(exclusionLayer1 | exclusionLayer2);
-        // Detectamos todos los colliders dentro del radio
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius,mask);
 
-        Collider closestCollider = null;
-        float closestDistance = Mathf.Infinity;
+        // Dirección hacia el transform objetivo (posJ)
+        Vector3 directionToTarget = (posJ.position - transform.position).normalized;
 
-        // Dirección hacia donde estamos mirando
-        Vector3 lookDirection = transform.right; //flecha roja del inspector xd
+        // Crear el rayo
+        Ray ray = new Ray(transform.position, directionToTarget);
 
-        // Iteramos a través de todos los colliders
-        foreach (Collider col in colliders)
+        // Inicializamos variables
+        bool jugadorEncontrado = false;
+        float closestDistance = detectionRadius;
+        RaycastHit closestHit;
+        string t="";
+        // Lanzamos el rayo y obtenemos todos los objetos impactados
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+
+        foreach (RaycastHit hit in hits)
         {
-            // Calculamos el ángulo entre objeto y vector de mirada
-            Vector3 directionToCollider = col.transform.position - transform.position;
-            float angle = Vector3.Angle(lookDirection, directionToCollider);
+            // Calculamos la distancia desde el origen hasta el punto de impacto
+            float distance = Vector3.Distance(transform.position, hit.point);
 
-            // Si el objeto está dentro del ángulo de visión (45º) y es el más cercano, lo almacenamos
-            if (angle <= detectionAngle / 2f)
-            {
-                float distance = directionToCollider.magnitude;
-
-                // Si es el objeto más cercano, lo guardamos
-                if (distance < closestDistance)
-                {
-                    closestCollider = col;
-                    closestDistance = distance;
-                }
-            }
+            // Si el objeto está más cerca que el más cercano previamente registrado
             
-        }
-        bool jugadorEncontrado = closestCollider != null && closestCollider.tag == "Player";
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestHit = hit;
 
+                t = closestHit.collider.tag;
+
+                Debug.Log(t);
+            }
+        }
+
+        jugadorEncontrado = t=="Player";
+
+        // Actualizamos las acciones del enemigo en función del resultado
         enemy.Disparando(jugadorEncontrado);
         enemy.MoverseHaciaJugador(jugadorEncontrado);
     }

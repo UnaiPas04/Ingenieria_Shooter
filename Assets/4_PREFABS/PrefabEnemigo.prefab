@@ -72,8 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881f1fd0a8ab8c240b69a04696bef582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 40
-  detectionAngle: 45
+  detectionRadius: 80
   exclusionLayer1:
     serializedVersion: 2
     m_Bits: 64
